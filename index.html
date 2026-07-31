@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -8,60 +7,70 @@
 <title>Horoscope du jour</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 25px 40px;
+    font-family: Arial, sans-serif;
+    background: #f5f3ef;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+#date {
+    margin-top: 6px;
+    font-size: 22px;
+    color: #666;
+    text-transform: capitalize;
+}
+
+.horoscopes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 20px;
+    max-width: 1600px;
+    margin: auto;
+}
+
+.signe {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+}
+
+.signe h2 {
+    margin: 0 0 7px 0;
+    font-size: 25px;
+}
+
+.signe p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+@media (max-width: 900px) {
     body {
-        margin: 0;
-        padding: 30px;
-        font-family: Arial, sans-serif;
-        background: #f5f3ef;
-        color: #333;
-    }
-
-    header {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    h1 {
-        font-size: 42px;
-        margin: 0 0 8px 0;
-    }
-
-    #date {
-        font-size: 22px;
-        color: #666;
+        padding: 20px;
     }
 
     .horoscopes {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-        max-width: 1400px;
-        margin: auto;
+        grid-template-columns: 1fr;
     }
-
-    .signe {
-        background: white;
-        border-radius: 12px;
-        padding: 18px 22px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .signe h2 {
-        margin: 0 0 8px 0;
-        font-size: 26px;
-    }
-
-    .signe p {
-        margin: 0;
-        font-size: 18px;
-        line-height: 1.4;
-    }
-
-    @media (max-width: 900px) {
-        .horoscopes {
-            grid-template-columns: 1fr;
-        }
-    }
+}
 </style>
 
 </head>
@@ -75,82 +84,82 @@
 
 <div class="horoscopes">
 
-```
 <div class="signe">
-    <h2>♈ Bélier</h2>
-    <p>Une journée dynamique s'annonce. Votre énergie vous permettra d'avancer efficacement dans vos projets. C'est le moment de prendre des initiatives tout en restant attentif aux personnes qui vous entourent.</p>
+<h2>♈ Bélier</h2>
+<p>Aujourd'hui, votre énergie et votre détermination vous permettent d'avancer efficacement. Une situation qui semblait compliquée pourrait finalement trouver une solution. Au travail, votre dynamisme sera remarqué. Côté relations, prenez le temps d'écouter les personnes qui vous entourent.</p>
 </div>
 
 <div class="signe">
-    <h2>♉ Taureau</h2>
-    <p>La patience sera votre meilleure alliée aujourd'hui. Prenez le temps de réfléchir avant de prendre une décision importante. Une bonne surprise pourrait venir égayer votre journée.</p>
+<h2>♉ Taureau</h2>
+<p>La journée vous invite à avancer avec calme et méthode. Votre patience sera récompensée et vous pourrez compter sur votre sens pratique pour résoudre les petits imprévus. Une bonne nouvelle pourrait venir améliorer votre journée. Profitez également d'un moment de détente.</p>
 </div>
 
 <div class="signe">
-    <h2>♊ Gémeaux</h2>
-    <p>Les échanges et la communication seront favorisés. Vous pourriez recevoir une information intéressante ou avoir une conversation qui vous donnera de nouvelles idées.</p>
+<h2>♊ Gémeaux</h2>
+<p>Les échanges seront au cœur de votre journée. Une conversation intéressante pourrait vous apporter une nouvelle idée ou une perspective différente. Votre curiosité est un véritable atout. Évitez toutefois de vous disperser et concentrez-vous sur vos priorités.</p>
 </div>
 
 <div class="signe">
-    <h2>♋ Cancer</h2>
-    <p>Une journée placée sous le signe de la douceur. Prenez le temps de vous recentrer et de profiter des petits moments agréables. Votre intuition pourrait vous être particulièrement utile.</p>
+<h2>♋ Cancer</h2>
+<p>Vous aurez besoin de vous sentir entouré et compris aujourd'hui. Votre intuition vous aidera à mieux appréhender les situations. Au travail, faites confiance à votre expérience. Une attention particulière de la part d'un proche pourrait vous faire beaucoup de bien.</p>
 </div>
 
 <div class="signe">
-    <h2>♌ Lion</h2>
-    <p>Votre confiance naturelle vous permettra de faire avancer vos projets. N'hésitez pas à mettre vos qualités en avant, tout en laissant également de la place aux idées des autres.</p>
+<h2>♌ Lion</h2>
+<p>Votre confiance et votre enthousiasme vous permettront de prendre les devants. C'est une bonne journée pour faire avancer un projet ou partager vos idées. Veillez simplement à ne pas vouloir tout contrôler. Les échanges seront plus constructifs si chacun peut s'exprimer.</p>
 </div>
 
 <div class="signe">
-    <h2>♍ Vierge</h2>
-    <p>Votre sens de l'organisation sera votre meilleur atout. Vous pourriez réussir à résoudre un problème qui vous préoccupait depuis quelque temps.</p>
+<h2>♍ Vierge</h2>
+<p>Votre sens de l'organisation sera particulièrement efficace aujourd'hui. Vous pourriez réussir à mettre de l'ordre dans une situation qui vous préoccupait. Prenez néanmoins le temps de souffler et ne cherchez pas la perfection à tout prix. Une petite pause vous fera du bien.</p>
 </div>
 
 <div class="signe">
-    <h2>♎ Balance</h2>
-    <p>Vous chercherez aujourd'hui à maintenir l'équilibre autour de vous. Une discussion constructive pourrait vous aider à clarifier une situation.</p>
+<h2>♎ Balance</h2>
+<p>Vous chercherez à préserver l'harmonie autour de vous. Une discussion permettra peut-être de clarifier une situation ou de repartir sur de meilleures bases. Votre capacité à trouver le juste équilibre sera votre meilleure alliée. Une agréable surprise pourrait ponctuer votre journée.</p>
 </div>
 
 <div class="signe">
-    <h2>♏ Scorpion</h2>
-    <p>Votre détermination est renforcée. Vous aurez la capacité d'aller au bout de ce que vous entreprenez. Faites confiance à votre instinct, tout en évitant de vous précipiter.</p>
+<h2>♏ Scorpion</h2>
+<p>Votre détermination est votre principale force aujourd'hui. Vous savez ce que vous voulez et vous êtes prêt à vous investir pour atteindre vos objectifs. Faites confiance à votre instinct, mais évitez de tirer des conclusions trop rapidement. Une information importante pourrait arriver.</p>
 </div>
 
 <div class="signe">
-    <h2>♐ Sagittaire</h2>
-    <p>Une envie de nouveauté pourrait vous pousser à sortir de votre routine. Profitez de cette énergie pour découvrir de nouvelles possibilités et partager vos idées.</p>
+<h2>♐ Sagittaire</h2>
+<p>Vous aurez envie de nouveauté et de changement. Cette énergie positive peut vous aider à sortir de votre routine et à découvrir de nouvelles possibilités. Une rencontre ou une discussion pourrait vous inspirer. Gardez cependant les pieds sur terre avant de vous lancer.</p>
 </div>
 
 <div class="signe">
-    <h2>♑ Capricorne</h2>
-    <p>Le sérieux et la persévérance porteront leurs fruits. Continuez à avancer étape par étape et ne vous découragez pas si les résultats prennent un peu de temps.</p>
+<h2>♑ Capricorne</h2>
+<p>Votre sérieux et votre persévérance vous permettent de progresser pas à pas. Même si les résultats ne sont pas immédiats, vos efforts commencent à porter leurs fruits. Aujourd'hui, privilégiez les objectifs réalistes et prenez le temps de reconnaître le chemin déjà parcouru.</p>
 </div>
 
 <div class="signe">
-    <h2>♒ Verseau</h2>
-    <p>Votre créativité sera particulièrement présente aujourd'hui. Une idée originale pourrait vous permettre de voir une situation sous un angle complètement différent.</p>
+<h2>♒ Verseau</h2>
+<p>Votre créativité est particulièrement présente aujourd'hui. Une idée originale pourrait vous permettre de résoudre un problème d'une manière inattendue. N'hésitez pas à partager votre point de vue. Les échanges avec votre entourage pourraient également vous réserver une belle surprise.</p>
 </div>
 
 <div class="signe">
-    <h2>♓ Poissons</h2>
-    <p>Votre sensibilité vous aidera à mieux comprendre les personnes qui vous entourent. Accordez-vous également quelques instants pour souffler et prendre soin de vous.</p>
+<h2>♓ Poissons</h2>
+<p>Votre sensibilité vous permet de percevoir facilement l'ambiance qui vous entoure. Écoutez votre intuition, tout en veillant à ne pas trop vous laisser influencer par les émotions des autres. Une journée idéale pour prendre du recul, vous détendre et profiter des petits plaisirs du quotidien.</p>
 </div>
-```
 
 </div>
 
 <script>
-    const aujourdHui = new Date();
 
-    const options = {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    };
+const aujourdHui = new Date();
 
-    document.getElementById('date').textContent =
-        aujourdHui.toLocaleDateString('fr-FR', options);
+const options = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+};
+
+document.getElementById('date').textContent =
+    aujourdHui.toLocaleDateString('fr-FR', options);
+
 </script>
 
 </body>
