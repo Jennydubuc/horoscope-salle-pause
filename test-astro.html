@@ -2,44 +2,302 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Test astrologique</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Données astrologiques du jour</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3ef;
+    margin: 0;
+    padding: 30px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+h1 {
+    text-align: center;
+}
+
+.date {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.planetes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.planete {
+    padding: 15px;
+    background: #f5f3ef;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.erreur {
+    color: #b00020;
+    text-align: center;
+}
+
+@media(max-width:700px) {
+    .planetes {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>🔮 Test astrologique</h1>
+<div class="container">
 
-<p id="date"></p>
+<h1>🔭 Données astrologiques du jour</h1>
 
-<div id="resultat">
-Chargement des données astrologiques...
+<div class="date" id="date"></div>
+
+<div id="chargement">
+Chargement des positions planétaires...
 </div>
 
+<div class="planetes" id="planetes"></div>
+
+</div>
+
+
 <script>
-// Date du jour
-const aujourdHui = new Date();
+
+/*
+==========================================
+CALCUL SIMPLIFIÉ DES POSITIONS PLANÉTAIRES
+==========================================
+
+Cette version utilise des cycles astronomiques
+approximatifs pour déterminer le signe zodiacal
+des planètes à partir de la date.
+
+Elle permet de générer une tendance astrologique
+quotidienne sans API externe.
+*/
+
+
+const signes = [
+    "Bélier",
+    "Taureau",
+    "Gémeaux",
+    "Cancer",
+    "Lion",
+    "Vierge",
+    "Balance",
+    "Scorpion",
+    "Sagittaire",
+    "Capricorne",
+    "Verseau",
+    "Poissons"
+];
+
+
+const maintenant = new Date();
+
+const jour = maintenant.getDate();
+const mois = maintenant.getMonth();
+const annee = maintenant.getFullYear();
+
 
 document.getElementById("date").textContent =
-    aujourdHui.toLocaleDateString("fr-FR", {
+    maintenant.toLocaleDateString("fr-FR", {
         weekday: "long",
         day: "numeric",
         month: "long",
         year: "numeric"
     });
 
-// Petit test de calcul automatique
-const jour = aujourdHui.getDate();
-const mois = aujourdHui.getMonth() + 1;
-const annee = aujourdHui.getFullYear();
 
-const nombre = jour + mois + annee;
+/*
+==========================================
+FONCTION DE CALCUL
+==========================================
+*/
 
-document.getElementById("resultat").innerHTML = `
-    <p>✅ La page fonctionne correctement.</p>
-    <p>📅 Date détectée : ${jour}/${mois}/${annee}</p>
-    <p>🔢 Calcul automatique effectué : ${nombre}</p>
-    <p>🌙 Prochaine étape : intégration des données astrologiques réelles.</p>
-`;
+function positionPlanete(
+    date,
+    dateReference,
+    periode,
+    positionReference
+) {
+
+    const difference =
+        (date - dateReference) /
+        (1000 * 60 * 60 * 24);
+
+    let position =
+        positionReference +
+        (difference / periode) * 360;
+
+    position = position % 360;
+
+    if (position < 0) {
+        position += 360;
+    }
+
+    return position;
+}
+
+
+/*
+==========================================
+CONVERSION DEGRE → SIGNE
+==========================================
+*/
+
+function signeDepuisDegre(degre) {
+
+    const index =
+        Math.floor(degre / 30);
+
+    const degreDansSigne =
+        Math.floor(degre % 30);
+
+    return {
+        nom: signes[index],
+        degre: degreDansSigne
+    };
+}
+
+
+/*
+==========================================
+DATE DE RÉFÉRENCE
+==========================================
+*/
+
+const reference =
+    new Date("2025-01-01T00:00:00");
+
+
+/*
+==========================================
+PÉRIODES ORBITALES APPROXIMATIVES
+==========================================
+*/
+
+const planetes = [
+
+{
+    nom: "☀️ Soleil",
+    periode: 365.25,
+    reference: 280
+},
+
+{
+    nom: "🌙 Lune",
+    periode: 27.32,
+    reference: 100
+},
+
+{
+    nom: "☿ Mercure",
+    periode: 88,
+    reference: 280
+},
+
+{
+    nom: "♀ Vénus",
+    periode: 224.7,
+    reference: 300
+},
+
+{
+    nom: "♂ Mars",
+    periode: 687,
+    reference: 120
+},
+
+{
+    nom: "♃ Jupiter",
+    periode: 4332.6,
+    reference: 45
+},
+
+{
+    nom: "♄ Saturne",
+    periode: 10759,
+    reference: 350
+}
+
+];
+
+
+/*
+==========================================
+CALCUL ET AFFICHAGE
+==========================================
+*/
+
+const conteneur =
+    document.getElementById("planetes");
+
+
+planetes.forEach(planete => {
+
+    const position =
+        positionPlanete(
+            maintenant,
+            reference,
+            planete.periode,
+            planete.reference
+        );
+
+
+    const resultat =
+        signeDepuisDegre(position);
+
+
+    const bloc =
+        document.createElement("div");
+
+
+    bloc.className =
+        "planete";
+
+
+    bloc.innerHTML = `
+
+        <strong>
+        ${planete.nom}
+        </strong>
+
+        <br>
+
+        ${resultat.nom}
+
+        (${resultat.degre}°)
+
+    `;
+
+
+    conteneur.appendChild(bloc);
+
+});
+
+
+document.getElementById(
+    "chargement"
+).style.display = "none";
+
 
 </script>
 
