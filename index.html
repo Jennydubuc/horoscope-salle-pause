@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Horoscope du jour</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -63,210 +65,582 @@ h1 {
 }
 
 @media (max-width: 900px) {
+
     .horoscopes {
         grid-template-columns: 1fr;
     }
+
 }
+
 </style>
 
 </head>
 
+
 <body>
 
+
 <header>
-    <h1>✨ Horoscope du jour ✨</h1>
-    <div id="date"></div>
+
+<h1>✨ Horoscope du jour ✨</h1>
+
+<div id="date"></div>
+
 </header>
+
 
 <div class="horoscopes" id="horoscopes"></div>
 
+
 <script>
 
-/* ================================
-   DONNÉES DES 12 SIGNES
-================================ */
+
+/* =====================================================
+   SIGNES DU ZODIAQUE
+===================================================== */
 
 const signes = [
 
 {
 nom: "Bélier",
-symbole: "♈",
-textes: [
-"Votre énergie est au rendez-vous aujourd'hui. Vous avez envie d'avancer et de faire bouger les choses. Profitez de cette dynamique pour vous attaquer à ce qui vous tient à cœur, mais évitez de vouloir aller trop vite.",
-"Une journée placée sous le signe de l'action. Une opportunité pourrait se présenter et vous demander de réagir rapidement. Faites confiance à votre instinct, tout en prenant quelques instants pour réfléchir avant de décider.",
-"Votre détermination vous permet de dépasser un petit obstacle. Ne vous laissez pas décourager par un imprévu : vous avez toutes les ressources nécessaires pour trouver une solution."
-]
+symbole: "♈"
 },
 
 {
 nom: "Taureau",
-symbole: "♉",
-textes: [
-"Votre patience et votre sens pratique seront vos meilleurs alliés. Avancez tranquillement, étape par étape, sans vous laisser perturber par les petits imprévus de la journée.",
-"Vous recherchez aujourd'hui la stabilité et la tranquillité. Une situation qui vous préoccupait pourrait commencer à s'améliorer. Faites confiance au temps et à votre persévérance.",
-"Une bonne nouvelle pourrait vous redonner le sourire. Profitez de cette journée pour prendre soin de vous et apprécier les petits plaisirs du quotidien."
-]
+symbole: "♉"
 },
 
 {
 nom: "Gémeaux",
-symbole: "♊",
-textes: [
-"Votre curiosité est particulièrement forte aujourd'hui. Une conversation intéressante pourrait vous donner une nouvelle idée ou vous permettre de voir une situation sous un autre angle.",
-"Les échanges sont favorisés. Vous pourriez recevoir une information importante ou faire une rencontre enrichissante. Restez attentif aux opportunités qui se présentent.",
-"Vous avez besoin de changement et de nouveauté. Sortez un peu de votre routine : une activité différente pourrait vous apporter une agréable surprise."
-]
+symbole: "♊"
 },
 
 {
 nom: "Cancer",
-symbole: "♋",
-textes: [
-"Votre intuition vous guide efficacement aujourd'hui. Écoutez vos ressentis, tout en prenant soin de ne pas trop vous laisser influencer par les émotions des autres.",
-"Une journée idéale pour vous rapprocher des personnes qui comptent pour vous. Un échange sincère pourrait vous faire beaucoup de bien.",
-"Vous avez besoin de calme et de sérénité. Accordez-vous un moment pour souffler et vous recentrer. Vous repartirez avec davantage d'énergie."
-]
+symbole: "♋"
 },
 
 {
 nom: "Lion",
-symbole: "♌",
-textes: [
-"Votre confiance naturelle vous permet de prendre les devants. C'est une bonne journée pour défendre vos idées et faire avancer vos projets.",
-"Vous pourriez être particulièrement remarqué aujourd'hui. Votre enthousiasme est communicatif, mais pensez également à laisser de la place aux idées des autres.",
-"Une occasion de montrer vos talents pourrait se présenter. Faites-vous confiance sans chercher à tout contrôler."
-]
+symbole: "♌"
 },
 
 {
 nom: "Vierge",
-symbole: "♍",
-textes: [
-"Votre sens de l'organisation vous permet de gagner du temps et de l'efficacité. Vous pourriez réussir à régler une situation qui vous préoccupait depuis quelque temps.",
-"Vous avez envie de mettre de l'ordre dans votre quotidien. C'est une excellente journée pour terminer ce qui a été laissé de côté.",
-"Ne cherchez pas la perfection à tout prix. Acceptez que certaines choses ne soient pas exactement comme prévu et accordez-vous le droit de souffler."
-]
+symbole: "♍"
 },
 
 {
 nom: "Balance",
-symbole: "♎",
-textes: [
-"Vous cherchez aujourd'hui à préserver l'harmonie autour de vous. Votre capacité à écouter et à comprendre les autres sera particulièrement appréciée.",
-"Une discussion pourrait permettre de clarifier une situation. Exprimez votre point de vue calmement et vous trouverez plus facilement un terrain d'entente.",
-"Vous avez besoin d'équilibre entre vos obligations et vos envies personnelles. Pensez un peu à vous et ne cherchez pas toujours à faire plaisir à tout le monde."
-]
+symbole: "♎"
 },
 
 {
 nom: "Scorpion",
-symbole: "♏",
-textes: [
-"Votre détermination est particulièrement forte. Vous savez ce que vous voulez et vous êtes prêt à vous investir pour atteindre votre objectif.",
-"Votre intuition vous permet de comprendre rapidement une situation. Faites confiance à votre ressenti, tout en prenant le temps de vérifier les informations importantes.",
-"Une situation pourrait évoluer plus rapidement que prévu. Restez attentif et gardez votre sang-froid : vous avez toutes les cartes en main."
-]
+symbole: "♏"
 },
 
 {
 nom: "Sagittaire",
-symbole: "♐",
-textes: [
-"Vous avez envie de nouveauté et d'aventure. Une nouvelle possibilité pourrait vous donner envie de sortir de votre routine.",
-"Votre optimisme vous aide à relativiser les petits problèmes. Profitez de cette énergie positive pour partager votre bonne humeur avec votre entourage.",
-"Une idée intéressante pourrait naître d'une discussion. Soyez curieux et ouvert : vous pourriez découvrir une possibilité à laquelle vous n'aviez pas pensé."
-]
+symbole: "♐"
 },
 
 {
 nom: "Capricorne",
-symbole: "♑",
-textes: [
-"Votre sérieux et votre persévérance commencent à porter leurs fruits. Continuez à avancer étape par étape : vos efforts ne sont pas inutiles.",
-"Vous avez aujourd'hui la possibilité de faire progresser un projet important. Votre sens des responsabilités sera un véritable atout.",
-"Ne vous mettez pas trop de pression. Vous avez déjà accompli beaucoup de choses et vous pouvez vous accorder le droit de faire une pause."
-]
+symbole: "♑"
 },
 
 {
 nom: "Verseau",
-symbole: "♒",
-textes: [
-"Votre créativité est particulièrement présente aujourd'hui. Une idée originale pourrait vous permettre de résoudre un problème d'une manière inattendue.",
-"Vous avez besoin de liberté et d'espace pour exprimer vos idées. N'hésitez pas à proposer une nouvelle manière de faire les choses.",
-"Une rencontre ou une conversation pourrait vous inspirer. Soyez attentif aux personnes qui croisent votre chemin aujourd'hui."
-]
+symbole: "♒"
 },
 
 {
 nom: "Poissons",
-symbole: "♓",
-textes: [
-"Votre sensibilité vous permet de mieux comprendre les personnes qui vous entourent. Faites confiance à votre intuition, mais pensez également à protéger votre énergie.",
-"Une journée propice à la détente et au recentrage. Prenez quelques minutes pour vous éloigner du rythme habituel et retrouver votre calme.",
-"Une petite attention ou une bonne nouvelle pourrait illuminer votre journée. Profitez pleinement de ces moments simples qui font du bien."
-]
+symbole: "♓"
 }
 
 ];
 
 
-/* ================================
-   CHOIX AUTOMATIQUE DU TEXTE
-   EN FONCTION DE LA DATE
-================================ */
+/* =====================================================
+   DATE DU JOUR
+===================================================== */
 
 const maintenant = new Date();
 
-const jour = maintenant.getDate();
-const mois = maintenant.getMonth();
-const annee = maintenant.getFullYear();
+const jour =
+maintenant.getDate();
 
-const numeroDuJour = annee * 10000 + (mois + 1) * 100 + jour;
+const mois =
+maintenant.getMonth();
 
+const annee =
+maintenant.getFullYear();
 
-/* ================================
-   AFFICHAGE DE LA DATE
-================================ */
-
-const optionsDate = {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-};
 
 document.getElementById("date").textContent =
-    maintenant.toLocaleDateString("fr-FR", optionsDate);
+
+maintenant.toLocaleDateString(
+"fr-FR",
+{
+weekday: "long",
+day: "numeric",
+month: "long",
+year: "numeric"
+}
+);
 
 
-/* ================================
-   AFFICHAGE DES HOROSCOPES
-================================ */
+/* =====================================================
+   CALCUL ASTROLOGIQUE SIMPLIFIÉ
+===================================================== */
 
-const conteneur = document.getElementById("horoscopes");
+const reference =
+new Date("2025-01-01T00:00:00");
 
-signes.forEach((signe, index) => {
 
-    const choix =
-        (numeroDuJour + index * 7) % signe.textes.length;
+function positionPlanete(
+date,
+periode,
+positionReference
+) {
 
-    const horoscope = signe.textes[choix];
+const difference =
 
-    const bloc = document.createElement("div");
+(date - reference) /
 
-    bloc.className = "signe";
+(1000 * 60 * 60 * 24);
 
-    bloc.innerHTML = `
-        <h2>${signe.symbole} ${signe.nom}</h2>
-        <p>${horoscope}</p>
-    `;
 
-    conteneur.appendChild(bloc);
+let position =
 
-});
+positionReference +
+
+(difference / periode) * 360;
+
+
+position = position % 360;
+
+
+if (position < 0) {
+
+position += 360;
+
+}
+
+
+return position;
+
+}
+
+
+/* =====================================================
+   POSITIONS DES PLANÈTES
+===================================================== */
+
+const planetes = [
+
+{
+nom: "Soleil",
+periode: 365.25,
+reference: 280
+},
+
+{
+nom: "Lune",
+periode: 27.32,
+reference: 100
+},
+
+{
+nom: "Mercure",
+periode: 88,
+reference: 280
+},
+
+{
+nom: "Vénus",
+periode: 224.7,
+reference: 300
+},
+
+{
+nom: "Mars",
+periode: 687,
+reference: 120
+},
+
+{
+nom: "Jupiter",
+periode: 4332.6,
+reference: 45
+},
+
+{
+nom: "Saturne",
+periode: 10759,
+reference: 350
+}
+
+];
+
+
+const positions = {};
+
+
+planetes.forEach(
+
+planete => {
+
+
+const position =
+
+positionPlanete(
+
+maintenant,
+
+planete.periode,
+
+planete.reference
+
+);
+
+
+positions[planete.nom] =
+
+position;
+
+
+}
+
+);
+
+
+/* =====================================================
+   INTERPRÉTATION ASTROLOGIQUE
+===================================================== */
+
+function signePlanete(position) {
+
+return Math.floor(
+
+position / 30
+
+);
+
+}
+
+
+const positionSoleil =
+
+signePlanete(
+
+positions.Soleil
+
+);
+
+
+const positionLune =
+
+signePlanete(
+
+positions.Lune
+
+);
+
+
+const positionMars =
+
+signePlanete(
+
+positions.Mars
+
+);
+
+
+const positionVenus =
+
+signePlanete(
+
+positions.Vénus
+
+);
+
+
+const positionJupiter =
+
+signePlanete(
+
+positions.Jupiter
+
+);
+
+
+/* =====================================================
+   TEXTES ASTROLOGIQUES
+===================================================== */
+
+const textes = [
+
+{
+
+debut:
+
+"Une journée dynamique vous attend. ",
+
+fin:
+
+"Votre énergie vous permet d'avancer efficacement dans vos projets. Faites confiance à votre instinct tout en prenant le temps d'écouter les personnes qui vous entourent."
+
+},
+
+{
+
+debut:
+
+"Le calme et la patience seront vos meilleurs alliés aujourd'hui. ",
+
+fin:
+
+"Vous avancez progressivement vers vos objectifs. Une situation qui semblait compliquée pourrait finalement trouver une issue favorable."
+
+},
+
+{
+
+debut:
+
+"Les échanges sont particulièrement favorisés aujourd'hui. ",
+
+fin:
+
+"Une conversation intéressante pourrait vous apporter une nouvelle idée ou vous permettre de voir une situation sous un angle différent."
+
+},
+
+{
+
+debut:
+
+"Votre intuition est particulièrement développée aujourd'hui. ",
+
+fin:
+
+"Écoutez vos ressentis sans pour autant vous laisser envahir par les émotions des autres. Une journée idéale pour prendre du recul."
+
+},
+
+{
+
+debut:
+
+"Votre confiance et votre enthousiasme vous permettent de prendre les devants. ",
+
+fin:
+
+"Une occasion de faire avancer un projet pourrait se présenter. N'hésitez pas à mettre vos qualités en avant."
+
+},
+
+{
+
+debut:
+
+"Votre sens de l'organisation est particulièrement efficace aujourd'hui. ",
+
+fin:
+
+"Vous pourriez réussir à régler une situation qui vous préoccupait depuis quelque temps. Accordez-vous tout de même quelques instants pour souffler."
+
+},
+
+{
+
+debut:
+
+"Vous recherchez aujourd'hui davantage d'équilibre et d'harmonie. ",
+
+fin:
+
+"Une discussion pourrait permettre de clarifier une situation. Votre capacité à écouter sera votre meilleure alliée."
+
+},
+
+{
+
+debut:
+
+"Votre détermination est particulièrement forte aujourd'hui. ",
+
+fin:
+
+"Vous savez ce que vous voulez et vous avez les ressources nécessaires pour avancer. Faites confiance à votre intuition."
+
+},
+
+{
+
+debut:
+
+"Une envie de nouveauté pourrait vous pousser à sortir de votre routine. ",
+
+fin:
+
+"Une rencontre ou une discussion pourrait vous inspirer. Restez ouvert aux nouvelles possibilités qui se présentent."
+
+},
+
+{
+
+debut:
+
+"Votre sérieux et votre persévérance commencent à porter leurs fruits. ",
+
+fin:
+
+"Continuez à avancer étape par étape. Même si les résultats ne sont pas immédiats, vos efforts sont en train de construire quelque chose de solide."
+
+},
+
+{
+
+debut:
+
+"Votre créativité est particulièrement présente aujourd'hui. ",
+
+fin:
+
+"Une idée originale pourrait vous permettre de voir une situation sous un angle complètement différent. N'hésitez pas à partager vos idées."
+
+},
+
+{
+
+debut:
+
+"Votre sensibilité vous aide à mieux comprendre les personnes qui vous entourent. ",
+
+fin:
+
+"Prenez toutefois le temps de préserver votre énergie et de vous accorder quelques moments de calme."
+
+}
+
+];
+
+
+/* =====================================================
+   GÉNÉRATION DU TEXTE QUOTIDIEN
+===================================================== */
+
+function genererHoroscope(
+
+index
+
+) {
+
+
+const influence =
+
+(
+
+positionSoleil +
+
+positionLune +
+
+positionMars +
+
+positionVenus +
+
+positionJupiter +
+
+index
+
+) % textes.length;
+
+
+const texte =
+
+textes[influence];
+
+
+return texte.debut +
+
+" " +
+
+texte.fin;
+
+}
+
+
+/* =====================================================
+   AFFICHAGE DES 12 HOROSCOPES
+===================================================== */
+
+const conteneur =
+
+document.getElementById(
+
+"horoscopes"
+
+);
+
+
+signes.forEach(
+
+(signe, index) => {
+
+
+const bloc =
+
+document.createElement(
+
+"div"
+
+);
+
+
+bloc.className =
+
+"signe";
+
+
+bloc.innerHTML = `
+
+<h2>
+
+${signe.symbole}
+
+${signe.nom}
+
+</h2>
+
+<p>
+
+${genererHoroscope(index)}
+
+</p>
+
+`;
+
+
+conteneur.appendChild(
+
+bloc
+
+);
+
+
+}
+
+);
+
 
 </script>
 
+
 </body>
+
 </html>
