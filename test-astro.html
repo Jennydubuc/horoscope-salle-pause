@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Test astrologique</title>
+</head>
+
+<body>
+
+<h1>🔮 Test astrologique</h1>
+
+<p id="date"></p>
+
+<div id="resultat">
+Chargement des données astrologiques...
+</div>
+
+<script>
+// Date du jour
+const aujourdHui = new Date();
+
+document.getElementById("date").textContent =
+    aujourdHui.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
+// Petit test de calcul automatique
+const jour = aujourdHui.getDate();
+const mois = aujourdHui.getMonth() + 1;
+const annee = aujourdHui.getFullYear();
+
+const nombre = jour + mois + annee;
+
+document.getElementById("resultat").innerHTML = `
+    <p>✅ La page fonctionne correctement.</p>
+    <p>📅 Date détectée : ${jour}/${mois}/${annee}</p>
+    <p>🔢 Calcul automatique effectué : ${nombre}</p>
+    <p>🌙 Prochaine étape : intégration des données astrologiques réelles.</p>
+`;
+
+</script>
+
+</body>
+</html>
