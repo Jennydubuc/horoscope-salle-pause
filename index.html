@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Horoscope du jour</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+        background: #f5f3ef;
+        color: #333;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 42px;
+        margin: 0 0 8px 0;
+    }
+
+    #date {
+        font-size: 22px;
+        color: #666;
+    }
+
+    .horoscopes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        max-width: 1400px;
+        margin: auto;
+    }
+
+    .signe {
+        background: white;
+        border-radius: 12px;
+        padding: 18px 22px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .signe h2 {
+        margin: 0 0 8px 0;
+        font-size: 26px;
+    }
+
+    .signe p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+        .horoscopes {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>✨ Horoscope du jour ✨</h1>
+    <div id="date"></div>
+</header>
+
+<div class="horoscopes">
+
+```
+<div class="signe">
+    <h2>♈ Bélier</h2>
+    <p>Une journée dynamique s'annonce. Votre énergie vous permettra d'avancer efficacement dans vos projets. C'est le moment de prendre des initiatives tout en restant attentif aux personnes qui vous entourent.</p>
+</div>
+
+<div class="signe">
+    <h2>♉ Taureau</h2>
+    <p>La patience sera votre meilleure alliée aujourd'hui. Prenez le temps de réfléchir avant de prendre une décision importante. Une bonne surprise pourrait venir égayer votre journée.</p>
+</div>
+
+<div class="signe">
+    <h2>♊ Gémeaux</h2>
+    <p>Les échanges et la communication seront favorisés. Vous pourriez recevoir une information intéressante ou avoir une conversation qui vous donnera de nouvelles idées.</p>
+</div>
+
+<div class="signe">
+    <h2>♋ Cancer</h2>
+    <p>Une journée placée sous le signe de la douceur. Prenez le temps de vous recentrer et de profiter des petits moments agréables. Votre intuition pourrait vous être particulièrement utile.</p>
+</div>
+
+<div class="signe">
+    <h2>♌ Lion</h2>
+    <p>Votre confiance naturelle vous permettra de faire avancer vos projets. N'hésitez pas à mettre vos qualités en avant, tout en laissant également de la place aux idées des autres.</p>
+</div>
+
+<div class="signe">
+    <h2>♍ Vierge</h2>
+    <p>Votre sens de l'organisation sera votre meilleur atout. Vous pourriez réussir à résoudre un problème qui vous préoccupait depuis quelque temps.</p>
+</div>
+
+<div class="signe">
+    <h2>♎ Balance</h2>
+    <p>Vous chercherez aujourd'hui à maintenir l'équilibre autour de vous. Une discussion constructive pourrait vous aider à clarifier une situation.</p>
+</div>
+
+<div class="signe">
+    <h2>♏ Scorpion</h2>
+    <p>Votre détermination est renforcée. Vous aurez la capacité d'aller au bout de ce que vous entreprenez. Faites confiance à votre instinct, tout en évitant de vous précipiter.</p>
+</div>
+
+<div class="signe">
+    <h2>♐ Sagittaire</h2>
+    <p>Une envie de nouveauté pourrait vous pousser à sortir de votre routine. Profitez de cette énergie pour découvrir de nouvelles possibilités et partager vos idées.</p>
+</div>
+
+<div class="signe">
+    <h2>♑ Capricorne</h2>
+    <p>Le sérieux et la persévérance porteront leurs fruits. Continuez à avancer étape par étape et ne vous découragez pas si les résultats prennent un peu de temps.</p>
+</div>
+
+<div class="signe">
+    <h2>♒ Verseau</h2>
+    <p>Votre créativité sera particulièrement présente aujourd'hui. Une idée originale pourrait vous permettre de voir une situation sous un angle complètement différent.</p>
+</div>
+
+<div class="signe">
+    <h2>♓ Poissons</h2>
+    <p>Votre sensibilité vous aidera à mieux comprendre les personnes qui vous entourent. Accordez-vous également quelques instants pour souffler et prendre soin de vous.</p>
+</div>
+```
+
+</div>
+
+<script>
+    const aujourdHui = new Date();
+
+    const options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    };
+
+    document.getElementById('date').textContent =
+        aujourdHui.toLocaleDateString('fr-FR', options);
+</script>
+
+</body>
+</html>
